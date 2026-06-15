@@ -4,39 +4,309 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Your Name | Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    :root {
+      --primary: #5865f2;
+      --green: #35ed7e;
+      --magenta: #ec48bd;
+      --link: #00b0f4;
+      --canvas: #0a0d3a;
+      --surface: #1e2353;
+      --onyx: #23272a;
+      --ink: #ffffff;
+      --dark: #000000;
+      --radius-xl: 40px;
+      --radius-lg: 16px;
+      --radius-sm: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(88, 101, 242, 0.45), transparent 35%),
+        radial-gradient(circle at top right, rgba(236, 72, 189, 0.35), transparent 35%),
+        var(--canvas);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(10, 13, 58, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo {
+      font-weight: 900;
+      color: white;
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    section {
+      margin-bottom: 32px;
+    }
+
+    .hero {
+      min-height: 70vh;
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 32px;
+      align-items: center;
+      padding: 48px;
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(135deg, rgba(88,101,242,0.85), rgba(236,72,189,0.75)),
+        var(--surface);
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      line-height: 1.05;
+    }
+
+    h1 {
+      font-size: clamp(44px, 9vw, 82px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(30px, 5vw, 48px);
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    h3 {
+      font-size: 22px;
+    }
+
+    .lead {
+      font-size: 20px;
+      max-width: 640px;
+      font-weight: 500;
+    }
+
+    .profile {
+      width: 100%;
+      max-width: 280px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 999px;
+      border: 8px solid white;
+      justify-self: center;
+      background: white;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+
+    .button {
+      padding: 14px 24px;
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      display: inline-block;
+    }
+
+    .green {
+      background: var(--green);
+      color: var(--dark);
+    }
+
+    .primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .magenta {
+      background: linear-gradient(135deg, var(--magenta), var(--primary));
+    }
+
+    .black {
+      background: #000;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .mini-card {
+      background: rgba(255,255,255,0.08);
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pills li {
+      background: var(--magenta);
+      color: white;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    @media (max-width: 768px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      main {
+        padding: 24px 16px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 32px 24px;
+        text-align: center;
+      }
+
+      .profile {
+        order: -1;
+        max-width: 190px;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 28px 22px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <header>
-    <h1>Your Name</h1>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#cv">CV</a>
-      <a href="#projects">Projects</a>
-      <a href="#courses">Courses</a>
-      <a href="#ai">AI Usage</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="nav">
+      <a class="logo" href="#home">YOUR NAME</a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#cv">CV</a>
+        <a href="#projects">Projects</a>
+        <a href="#courses">Courses</a>
+        <a href="#ai">AI Usage</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section id="about" class="card hero">
-      <img src="assets/profile.png" alt="Profile placeholder" />
+    <section id="home" class="hero">
       <div>
-        <h2>About Me</h2>
-        <p>
-          Hello! I am <strong>Your Name</strong>, a student at Seoul National
-          University. This is a placeholder personal introduction for my GitHub
-          Pages portfolio.
+        <h1>Your Name</h1>
+        <p class="lead">
+          A Seoul National University student building simple, useful, and playful web experiences.
         </p>
+        <div class="buttons">
+          <a class="button green" href="assets/cv.pdf" target="_blank">View CV</a>
+          <a class="button primary" href="#contact">Contact Me</a>
+        </div>
       </div>
+
+      <img class="profile" src="assets/profile.png" alt="Profile placeholder" />
     </section>
 
-    <section id="cv" class="card">
+    <section id="about" class="card">
+      <h2>About Me</h2>
+      <p>
+        Hello! I am <strong>Your Name</strong>, a student at
+        <strong>Seoul National University</strong>. This is a placeholder
+        self-introduction for my GitHub Pages portfolio.
+      </p>
+    </section>
+
+    <section id="cv" class="card black">
       <h2>CV / Resume</h2>
       <p>
-        You can view my placeholder CV here:
-        <a href="assets/cv.pdf" target="_blank">Download CV</a>
+        My placeholder CV is available here:
+        <a href="assets/cv.pdf" target="_blank">Download CV PDF</a>
       </p>
       <ul>
         <li><strong>Education:</strong> Seoul National University</li>
@@ -45,21 +315,23 @@
       </ul>
     </section>
 
-    <section id="projects" class="card">
+    <section id="projects" class="card magenta">
       <h2>Projects & Activities</h2>
-      <article>
-        <h3>GitHub Pages Portfolio</h3>
-        <p>A static personal website built with HTML and CSS.</p>
-      </article>
-      <article>
-        <h3>Course Project</h3>
-        <p>A placeholder project about programming and software design.</p>
-      </article>
+      <div class="grid">
+        <article class="mini-card">
+          <h3>GitHub Pages Portfolio</h3>
+          <p>A responsive static personal website built with HTML and CSS.</p>
+        </article>
+        <article class="mini-card">
+          <h3>Course Project</h3>
+          <p>A placeholder programming project about software design and implementation.</p>
+        </article>
+      </div>
     </section>
 
     <section id="courses" class="card">
       <h2>Courses I Plan to Take</h2>
-      <ul>
+      <ul class="pills">
         <li>Algorithms</li>
         <li>Artificial Intelligence</li>
         <li>Database Systems</li>
@@ -71,20 +343,25 @@
       <h2>AI Usage</h2>
       <p><strong>Tool:</strong> ChatGPT</p>
       <p>
-        <strong>Prompt:</strong> Build a static GitHub Pages personal website
-        using placeholders for profile image and CV.
+        <strong>Prompt:</strong> Make my GitHub Pages portfolio look good on PC
+        and mobile, and apply a Discord-inspired design system.
       </p>
     </section>
 
     <section id="contact" class="card">
       <h2>Contact</h2>
-      <p>Email: your@snu.ac.kr</p>
-      <p>GitHub: github.com/your-github-username</p>
+      <p>Email: <a href="mailto:your@snu.ac.kr">your@snu.ac.kr</a></p>
+      <p>
+        GitHub:
+        <a href="https://github.com/your-github-username" target="_blank">
+          github.com/your-github-username
+        </a>
+      </p>
     </section>
   </main>
 
   <footer>
-    <p>© 2026 Your Name</p>
+    <p>© 2026 Your Name. Built for GitHub Pages.</p>
   </footer>
 </body>
 </html>
